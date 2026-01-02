@@ -4,6 +4,7 @@ import AddExpenseForm from "../components/AddExpenseForm";
 import { getSummary } from "../services/api";
 import AddIncomeForm from "../components/AddIncomeForm";
 import RecentExpenses from "../components/RecentExpenses";
+import ExpensesByCategoryChart from "../components/ExpensesByCategoryChart";
 
 
 function Dashboard() {
@@ -13,6 +14,8 @@ function Dashboard() {
     const [expenses, setExpenses] = useState([]);
     const [expensesLoading, setExpensesLoading] = useState(true);
     const [expensesError, setExpensesError] = useState(null);
+    const [refreshKey, setRefreshKey] = useState(0);
+
 
     async function loadSummary() {
         try {
@@ -23,6 +26,11 @@ function Dashboard() {
         } finally {
             setLoading(false);
         }
+    }
+
+    function handleExpenseAdded() {
+        loadSummary();
+        setRefreshKey((prev) => prev + 1);
     }
 
     async function loadRecentExpenses() {
@@ -64,8 +72,8 @@ function Dashboard() {
 
             <AddExpenseForm
                 onExpenseAdded={() => {
-                    loadSummary();
                     loadRecentExpenses();
+                    handleExpenseAdded();
                 }}
             />
 
@@ -93,7 +101,12 @@ function Dashboard() {
                 subtitle="Percentage of income spent"
             />
 
+            <ExpensesByCategoryChart
+                refreshKey={refreshKey}
+            />
+
             <RecentExpenses
+                refreshKey={refreshKey}
                 expenses={expenses}
                 loading={expensesLoading}
                 error={expensesError}
