@@ -5,6 +5,8 @@ import { getSummary } from "../services/api";
 import AddIncomeForm from "../components/AddIncomeForm";
 import RecentExpenses from "../components/RecentExpenses";
 import ExpensesByCategoryChart from "../components/ExpensesByCategoryChart";
+import AIAdvice from "../components/AIAdvice";
+
 
 
 function Dashboard() {
@@ -102,6 +104,10 @@ function Dashboard() {
             />
 
             <ExpensesByCategoryChart
+                refreshKey={refreshKey}
+            />
+
+            <AIAdvice
                 refreshKey={refreshKey}
             />
 
