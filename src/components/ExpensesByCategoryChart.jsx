@@ -83,7 +83,7 @@ function ExpensesByCategoryChart({ refreshKey }) {
                                 boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
                             }}
                             labelStyle={{
-                                color: "#9ca3af",
+                                color: "#252525ff",
                                 fontSize: "12px",
                                 fontWeight: 500,
                                 marginBottom: "4px",
