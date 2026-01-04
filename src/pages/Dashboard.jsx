@@ -6,6 +6,7 @@ import AddIncomeForm from "../components/AddIncomeForm";
 import RecentExpenses from "../components/RecentExpenses";
 import ExpensesByCategoryChart from "../components/ExpensesByCategoryChart";
 import AIAdvice from "../components/AIAdvice";
+import "../styles/layout.css";
 
 
 
@@ -64,59 +65,79 @@ function Dashboard() {
     if (error) return <p>{error}</p>;
 
     return (
-        <div style={{ padding: "16px" }}>
-            <h2>Dashboard</h2>
-            <AddIncomeForm
-                onIncomeAdded={() => {
-                    loadSummary();
-                }}
-            />
+        <div className="dashboard">
 
-            <AddExpenseForm
-                onExpenseAdded={() => {
-                    loadRecentExpenses();
-                    handleExpenseAdded();
-                }}
-            />
+            <div className="section">
+                <h2 className="title-section">Overview</h2>
 
-            <SummaryCard
-                title="Income"
-                value={`$${summary.total_income}`}
-                subtitle="Last 30 days"
-            />
+                <div className="summary-grid">
+                    <SummaryCard
+                        title="Income"
+                        value={`$${summary.total_income}`}
+                        subtitle="Last 30 days"
+                    />
 
-            <SummaryCard
-                title="Expenses"
-                value={`$${summary.total_expenses}`}
-                subtitle="Last 30 days"
-            />
+                    <SummaryCard
+                        title="Expenses"
+                        value={`$${summary.total_expenses}`}
+                        subtitle="Last 30 days"
+                    />
 
-            <SummaryCard
-                title="Savings"
-                value={`$${summary.savings}`}
-                subtitle="Income - Expenses"
-            />
+                    <SummaryCard
+                        title="Savings"
+                        value={`$${summary.savings}`}
+                        subtitle="Income - Expenses"
+                    />
 
-            <SummaryCard
-                title="Expense Ratio"
-                value={`${summary.expense_ratio}%`}
-                subtitle="Percentage of income spent"
-            />
+                    <SummaryCard
+                        title="Expense Ratio"
+                        value={`${summary.expense_ratio}%`}
+                        subtitle="Percentage of income spent"
+                    />
+                </div>
+            </div>
 
-            <ExpensesByCategoryChart
-                refreshKey={refreshKey}
-            />
 
-            <AIAdvice
-                refreshKey={refreshKey}
-            />
+            <div className="section">
+                <h2 className="title-section">Actions</h2>
 
-            <RecentExpenses
-                refreshKey={refreshKey}
-                expenses={expenses}
-                loading={expensesLoading}
-                error={expensesError}
-            />
+                <div className="actions-grid">
+                    <AddIncomeForm
+                        onIncomeAdded={() => {
+                            loadSummary();
+                        }}
+                    />
+
+                    <AddExpenseForm
+                        onExpenseAdded={() => {
+                            loadRecentExpenses();
+                            handleExpenseAdded();
+                        }}
+                    />
+                </div>
+            </div>
+
+
+            <div className="section">
+                <ExpensesByCategoryChart
+                    refreshKey={refreshKey}
+                />
+            </div>
+
+            <div className="section">
+                <AIAdvice
+                    refreshKey={refreshKey}
+                />
+            </div>
+
+            <div className="section">
+                <RecentExpenses
+                    refreshKey={refreshKey}
+                    expenses={expenses}
+                    loading={expensesLoading}
+                    error={expensesError}
+                />
+            </div>
         </div>
     );
 }

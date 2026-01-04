@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../styles/forms.css";
 
 function AddExpenseForm({ onExpenseAdded }) {
     const [amount, setAmount] = useState("");
@@ -47,7 +48,7 @@ function AddExpenseForm({ onExpenseAdded }) {
             setCategoryId("");
 
             onExpenseAdded();
-        } catch (err) {
+        } catch {
             setError("Could not save expense");
         } finally {
             setLoading(false);
@@ -72,82 +73,99 @@ function AddExpenseForm({ onExpenseAdded }) {
     }
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            style={{
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                padding: "16px",
-                marginBottom: "16px",
-                backgroundColor: "#fff",
-            }}
-        >
-            <h3>Add Expense</h3>
+        <form onSubmit={handleSubmit} className="form-card">
+            <h3 className="title-section">Add Expense</h3>
 
-            <input
-                type="number"
-                placeholder="Amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                required
-                style={{ width: "100%", marginBottom: "8px" }}
-            />
+            <div className="form-group">
+                <input
+                    type="number"
+                    placeholder="Amount"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    required
+                />
+            </div>
 
-            <select
-                value={categoryId}
-                onChange={(e) => {
-                    if (e.target.value === "new") {
-                        setShowNewCategory(true);
-                    } else {
-                        setCategoryId(e.target.value);
-                    }
-                }}
-                required
-                style={{ width: "100%", marginBottom: "8px" }}
-            >
-                <option value="">Select category</option>
+            <div className="form-group">
+                <select
+                    value={categoryId}
+                    onChange={(e) => {
+                        if (e.target.value === "new") {
+                            setShowNewCategory(true);
+                        } else {
+                            setCategoryId(e.target.value);
+                        }
+                    }}
+                    required
+                >
+                    <option value="">Select category</option>
 
-                {categories.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                        {cat.name}
-                    </option>
-                ))}
+                    {categories.map((cat) => (
+                        <option key={cat.id} value={cat.id}>
+                            {cat.name}
+                        </option>
+                    ))}
 
-                <option value="new">➕ Create new category</option>
-            </select>
+                    <option value="new">➕ Create new category</option>
+                </select>
+            </div>
+
+            <div className="form-group">
+                <input
+                    type="text"
+                    placeholder="Description (optional)"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+            </div>
+
+            {error && <p className="form-error">{error}</p>}
+
+            <div className="form-actions">
+                <button type="submit" disabled={loading}>
+                    {loading ? "Saving..." : "Add Expense"}
+                </button>
+            </div>
 
             {showNewCategory && (
-                <div style={{ marginBottom: "8px" }}>
+                <div className="category-overlay">
+                    <div className="category-overlay-header">
+                        <span className="category-overlay-title">
+                            New category
+                        </span>
+
+                        <button
+                            type="button"
+                            className="overlay-close"
+                            aria-label="Close"
+                            onClick={() => {
+                                setShowNewCategory(false);
+                                setNewCategory("");
+                            }}
+                        >
+                            ✕
+                        </button>
+                    </div>
+
+
                     <input
                         type="text"
-                        placeholder="New category name"
+                        placeholder="Category name"
                         value={newCategory}
                         onChange={(e) => setNewCategory(e.target.value)}
-                        style={{ width: "100%", marginBottom: "4px" }}
+                        autoFocus
                     />
-                    <button
-                        type="button"
-                        onClick={createCategory}
-                        style={{ width: "100%" }}
-                    >
-                        Save category
-                    </button>
+
+                    <div className="form-actions">
+                        <button
+                            type="button"
+                            onClick={createCategory}
+                        >
+                            Save category
+                        </button>
+                    </div>
                 </div>
             )}
-
-            <input
-                type="text"
-                placeholder="Description (optional)"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                style={{ width: "100%", marginBottom: "8px" }}
-            />
-
-            {error && <p style={{ color: "red" }}>{error}</p>}
-
-            <button type="submit" disabled={loading}>
-                {loading ? "Saving..." : "Add Expense"}
-            </button>
         </form>
     );
 }

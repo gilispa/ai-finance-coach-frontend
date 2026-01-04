@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/cards.css";
 
 function AIAdvice() {
     const [advice, setAdvice] = useState(null);
@@ -28,22 +29,17 @@ function AIAdvice() {
     }
 
     return (
-        <div
-            style={{
-                marginTop: "24px",
-                padding: "16px",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                backgroundColor: "#f9fafb",
-            }}
-        >
-            <h3>🧠 AI Financial Coach</h3>
+        <div className="ai-card">
+            <div className="ai-header">
+                <span className="ai-badge">AI</span>
+                <h3 className="card-title">Financial Coach</h3>
+            </div>
 
             {!advice && (
                 <>
-                    <p>
+                    <p className="ai-description">
                         Get personalized insights based on your recent income
-                        and expenses.
+                        and spending patterns.
                     </p>
 
                     <button
@@ -55,16 +51,10 @@ function AIAdvice() {
                 </>
             )}
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p className="ai-error">{error}</p>}
 
             {advice && (
-                <p
-                    style={{
-                        marginTop: "12px",
-                        whiteSpace: "pre-line",
-                        lineHeight: "1.6",
-                    }}
-                >
+                <p className="ai-response">
                     {advice}
                 </p>
             )}

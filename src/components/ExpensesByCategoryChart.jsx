@@ -7,13 +7,15 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
+import "../styles/cards.css";
+
 const COLORS = [
-    "#0088FE",
-    "#00C49F",
-    "#FFBB28",
-    "#FF8042",
-    "#AF19FF",
-    "#FF4560",
+    "#3b82f6",
+    "#60a5fa",
+    "#38bdf8",
+    "#22d3ee",
+    "#6366f1",
+    "#818cf8",
 ];
 
 function ExpensesByCategoryChart({ refreshKey }) {
@@ -31,13 +33,11 @@ function ExpensesByCategoryChart({ refreshKey }) {
                     "http://127.0.0.1:8000/analytics/expenses-by-category"
                 );
 
-                if (!response.ok) {
-                    throw new Error("Failed to load chart data");
-                }
+                if (!response.ok) throw new Error();
 
                 const result = await response.json();
                 setData(result);
-            } catch (err) {
+            } catch {
                 setError("Could not load chart");
             } finally {
                 setLoading(false);
@@ -52,40 +52,31 @@ function ExpensesByCategoryChart({ refreshKey }) {
     if (data.length === 0) return <p>No expense data yet.</p>;
 
     return (
-        <div
-            style={{
-                width: "100%",
-                height: 300,
-                marginTop: "24px",
-                padding: "16px",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                backgroundColor: "#fff",
-            }}
-        >
-            <h3>Expenses by Category</h3>
+        <div className="card">
+            <h3 className="card-title">Spending Breakdown</h3>
 
-            <ResponsiveContainer>
-                <PieChart>
-                    <Pie
-                        data={data}
-                        dataKey="total"
-                        nameKey="category"
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={100}
-                        label
-                    >
-                        {data.map((_, index) => (
-                            <Cell
-                                key={index}
-                                fill={COLORS[index % COLORS.length]}
-                            />
-                        ))}
-                    </Pie>
-                    <Tooltip />
-                </PieChart>
-            </ResponsiveContainer>
+            <div style={{ width: "100%", height: 260 }}>
+                <ResponsiveContainer>
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            dataKey="total"
+                            nameKey="category"
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={90}
+                        >
+                            {data.map((_, index) => (
+                                <Cell
+                                    key={index}
+                                    fill={COLORS[index % COLORS.length]}
+                                />
+                            ))}
+                        </Pie>
+                        <Tooltip cursor={false} />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     );
 }

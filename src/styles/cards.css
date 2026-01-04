@@ -1,0 +1,84 @@
+.card {
+    background: linear-gradient(180deg,
+            var(--bg-card),
+            #020617);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0 0 1px var(--accent-glow);
+}
+
+.summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-title {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.card-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.ai-card {
+    background: linear-gradient(180deg,
+            var(--bg-card),
+            #020617);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+.ai-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: rgba(59, 130, 246, 0.15);
+    color: var(--accent);
+    font-weight: 600;
+    display: flex;
+}
+
+.ai-description {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.ai-response {
+    margin-top: 8px;
+    line-height: 1.65;
+    white-space: pre-line;
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+.ai-error {
+    color: #f87171;
+    font-size: 13px;
+}

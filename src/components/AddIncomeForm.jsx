@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/forms.css";
 
 function AddIncomeForm({ onIncomeAdded }) {
     const [amount, setAmount] = useState("");
@@ -29,8 +30,7 @@ function AddIncomeForm({ onIncomeAdded }) {
 
             setAmount("");
             setSource("");
-
-            onIncomeAdded(); // notifica al dashboard
+            onIncomeAdded();
         } catch (err) {
             setError("Could not save income");
         } finally {
@@ -39,41 +39,36 @@ function AddIncomeForm({ onIncomeAdded }) {
     }
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            style={{
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                padding: "16px",
-                marginBottom: "16px",
-                backgroundColor: "#fff",
-            }}
-        >
-            <h3>Add Income</h3>
+        <form onSubmit={handleSubmit} className="form-card">
+            <h3 className="title-section">Add Income</h3>
 
-            <input
-                type="number"
-                placeholder="Amount"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                required
-                style={{ width: "100%", marginBottom: "8px" }}
-            />
+            <div className="form-group">
+                <input
+                    type="number"
+                    placeholder="Amount"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    required
+                />
+            </div>
 
-            <input
-                type="text"
-                placeholder="Source (e.g. salary, freelance)"
-                value={source}
-                onChange={(e) => setSource(e.target.value)}
-                required
-                style={{ width: "100%", marginBottom: "8px" }}
-            />
+            <div className="form-group">
+                <input
+                    type="text"
+                    placeholder="Source (e.g. salary, freelance)"
+                    value={source}
+                    onChange={(e) => setSource(e.target.value)}
+                    required
+                />
+            </div>
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p className="form-error">{error}</p>}
 
-            <button type="submit" disabled={loading}>
-                {loading ? "Saving..." : "Add Income"}
-            </button>
+            <div className="form-actions">
+                <button type="submit" disabled={loading}>
+                    {loading ? "Saving..." : "Add Income"}
+                </button>
+            </div>
         </form>
     );
 }
