@@ -73,7 +73,27 @@ function ExpensesByCategoryChart({ refreshKey }) {
                                 />
                             ))}
                         </Pie>
-                        <Tooltip cursor={false} />
+                        <Tooltip
+                            cursor={false}
+                            contentStyle={{
+                                background: "linear-gradient(180deg, #0b1220, #020617)",
+                                border: "1px solid #1e293b",
+                                borderRadius: "12px",
+                                padding: "10px 12px",
+                                boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+                            }}
+                            labelStyle={{
+                                color: "#9ca3af",
+                                fontSize: "12px",
+                                fontWeight: 500,
+                                marginBottom: "4px",
+                            }}
+                            itemStyle={{
+                                color: "#e5e7eb",
+                                fontSize: "13px",
+                                fontWeight: 600,
+                            }}
+                        />
                     </PieChart>
                 </ResponsiveContainer>
             </div>
