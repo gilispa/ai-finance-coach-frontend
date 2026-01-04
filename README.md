@@ -65,6 +65,7 @@ frontend/
 ├── package.json
 ├── vite-env.d.ts
 └── vite.config.js
+```
 
 ## Getting Started
 
@@ -93,7 +94,7 @@ npm run dev
 
 This Frontend is designed to work with the AI Finance Coach Backend API. The API is hosted on a separate server and is used to retrieve financial data and generate AI-powered financial insights.
 
-Ai-finance-coach-backend repository: [HERE](https://github.com/gilispa/ai-finance-coach-backend)
+[Ai-finance-coach-backend repository](https://github.com/gilispa/ai-finance-coach-backend)
 
 Default API URL: http://127.0.0.1:8000
 
