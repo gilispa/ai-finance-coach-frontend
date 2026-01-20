@@ -1,4 +1,4 @@
-# 🧠 AI Finance Coach – Frontend
+# 🤖 AI Finance Coach – Frontend
 
 Frontend web application for **AI Finance Coach**, built to help users track income and expenses, visualize spending habits, and receive AI-powered financial insights in a clear and friendly way.
 
@@ -18,7 +18,7 @@ This project focuses on **usability, clarity, and real-time interaction** with t
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **React**
 - **Vite**
