@@ -6,7 +6,7 @@ This project focuses on **usability, clarity, and real-time interaction** with t
 
 ---
 
-## 🚀 Features
+## Features
 
 - Add and manage **expenses** with categorized tracking  
 - Add and track **income**
